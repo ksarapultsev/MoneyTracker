@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MoneyTracker</string>
+    <string name="add_item_title">Новая запись</string>
+
+    <string name="currency_rur">₽</string>
+    <string name="activity_items_list_title">Учет бюджета</string>
+
+
 </resources>
