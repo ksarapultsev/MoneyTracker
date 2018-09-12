@@ -64,7 +64,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
         public void applyData(Item record) {
             title.setText(record.getTitle());
-            price.setText(String.valueOf(record.getPrice()));
+            price.setText(record.getPriceTitle());
 
         }
     }
