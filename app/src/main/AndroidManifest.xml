@@ -10,19 +10,13 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" >
-
-        </activity>
-        <activity android:name=".AddItemActivity"
-                  android:title="@string/add_item_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ItemListActivity"
-                  android:title="@string/activity_items_list_title">
+        <activity android:name=".AddItemActivity" android:title="@string/add_item_title"/>
 
-        </activity>
     </application>
 
 </manifest>

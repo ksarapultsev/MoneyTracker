@@ -5,5 +5,17 @@
     <string name="currency_rur">₽</string>
     <string name="activity_items_list_title">Учет бюджета</string>
 
+    <string name="tab_incomes">Доходы</string>
+    <string name="tab_expenses">Расходы</string>
+    <string name="tab_balance">Баланс</string>
 
+    <string-array name="tab_title">
+        <item>@string/tab_incomes</item>
+        <item>@string/tab_expenses</item>
+        <item>@string/tab_balance</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Balance fragment</string>
+    <string name="rur">₽</string>
 </resources>
