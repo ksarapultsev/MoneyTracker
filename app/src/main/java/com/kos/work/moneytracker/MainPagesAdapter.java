@@ -24,13 +24,13 @@ public class MainPagesAdapter  extends FragmentPagerAdapter {
 
         switch (position) {
             case PAGE_INCOMES:
-                return ItemsFragment.createItemsFragment(ItemsFragment.TYPE_INCOMES);
+                return ItemsFragment.createItemsFragment(Item.TYPE_INCOMES);
 
             case PAGE_EXPENSES:
-                return ItemsFragment.createItemsFragment(ItemsFragment.TYPE_EXPENSES);
+                return ItemsFragment.createItemsFragment(Item.TYPE_EXPENSES);
 
             case PAGE_BALANCE:
-                return BalanceFragment.createItemsFragment(ItemsFragment.TYPE_BALANCE);
+                return null;
 
             default: return null;
 
@@ -39,7 +39,7 @@ public class MainPagesAdapter  extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Nullable
