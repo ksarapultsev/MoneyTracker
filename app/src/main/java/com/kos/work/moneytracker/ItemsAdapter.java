@@ -14,8 +14,14 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     private List<Item> data = new ArrayList<>();
 
-    public ItemsAdapter() {
-        createData();
+//    public ItemsAdapter() {
+//        createData();
+//    }
+
+    public void setData(List<Item> data) {
+        this.data = data;
+        notifyDataSetChanged();
+
     }
 
     @NonNull
@@ -37,20 +43,20 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     }
 
     private void createData() {
-        data.add(new Item("Молоко",35));
-        data.add(new Item("Жизнь",1));
-        data.add(new Item("Курсы",50));
-        data.add(new Item("Хлеб",26));
-        data.add(new Item("Тот самый ужин который я оплатил за всех потому что платил картой",100));
-        data.add(new Item("",0));
-        data.add(new Item("Тот самый умный",604));
-        data.add(new Item("ракета Falcon Heavy ",1));
-        data.add(new Item("Лего Тысячелетний сокол",1000000));
-        data.add(new Item("Монитор",100));
-        data.add(new Item("MackBook Pro",100));
-        data.add(new Item("Шоколодка",100));
-        data.add(new Item("Шкаф",100));
-    }
+//
+    }    // data.add(new Item("Молоко",35));
+//        data.add(new Item("Жизнь",1));
+//        data.add(new Item("Курсы",50));
+//        data.add(new Item("Хлеб",26));
+//        data.add(new Item("Тот самый ужин который я оплатил за всех потому что платил картой",100));
+//        data.add(new Item("",0));
+//        data.add(new Item("Тот самый умный",604));
+//        data.add(new Item("ракета Falcon Heavy ",1));
+//        data.add(new Item("Лего Тысячелетний сокол",1000000));
+//        data.add(new Item("Монитор",100));
+//        data.add(new Item("MackBook Pro",100));
+//        data.add(new Item("Шоколодка",100));
+//        data.add(new Item("Шкаф",100));
 
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -62,9 +68,9 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
             price = itemView.findViewById(R.id.price);
         }
 
-        public void applyData(Item record) {
-            title.setText(record.getTitle());
-            price.setText(record.getPriceTitle());
+        public void applyData(Item item) {
+            title.setText(item.getTitle());
+            price.setText(item.getPriceTitle());
 
         }
     }
