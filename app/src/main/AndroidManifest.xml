@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AddItemActivity" android:title="@string/add_item_title"/>
+        <activity android:name=".AddItemActivity"/>
 
     </application>
 
