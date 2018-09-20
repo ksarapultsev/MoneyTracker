@@ -2,6 +2,7 @@ package com.kos.work.moneytracker;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,11 @@ import java.util.List;
 class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     private List<Item> data = new ArrayList<>();
+    private ItemsAdapterListener listiner = null;
+
+    public void setListiner(ItemsAdapterListener listiner) {
+        this.listiner= listiner;
+    }
 
 //    public ItemsAdapter() {
 //        createData();
@@ -38,7 +44,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     @Override
     public void onBindViewHolder(ItemsAdapter.ItemViewHolder holder, int position) {
         Item record = data.get(position);
-        holder.applyData(record);
+        holder.bind(record, position, listiner, selections.get(position, false));
     }
 
     @Override
@@ -46,6 +52,35 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         return data.size();
     }
 
+    private SparseBooleanArray selections = new SparseBooleanArray();
+    public void toggleSelection(int position) {
+        if (selections.get(position, false)) {
+            selections.delete(position);
+        } else {
+            selections.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+    void clearSelections() {
+        selections.clear();
+        notifyDataSetChanged();
+    }
+
+    int getSelectedItemCount() {
+        return selections.size();
+    }
+    List<Integer> getSelectedItems() {
+        List<Integer> items = new ArrayList<>(selections.size());
+        for (int i=0;i<selections.size();i++) {
+            items.add(selections.keyAt(i));
+        }
+        return items;
+    }
+    Item remove(int pos) {
+        final Item item = data.remove(pos);
+        notifyItemRemoved(pos);
+        return item;
+    }
     private void createData() {
 //
     }    // data.add(new Item("Молоко",35));
@@ -72,9 +107,29 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
             price = itemView.findViewById(R.id.price);
         }
 
-        public void applyData(Item item) {
+        public void bind(final Item item, final int position, final ItemsAdapterListener listiner, boolean selected) {
             title.setText(item.getTitle());
             price.setText(item.getPriceTitle());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listiner != null) {
+                        listiner.onItemClick(item, position);
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (listiner != null) {
+                        listiner.onItemLongClick(item, position);
+                    }
+                    return true;
+                }
+            });
+            itemView.setActivated(selected);
 
         }
     }
