@@ -20,6 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kos.work.moneytracker.api.AddItemsResult;
+import com.kos.work.moneytracker.api.Api;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,7 +53,7 @@ public class ItemsFragment   extends Fragment {
     private SwipeRefreshLayout refresh;
 
     private Api api;
-
+    private App app;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,8 +66,9 @@ public class ItemsFragment   extends Fragment {
         if (type.equals(Item.TYPE_UNKNOWN)) {
             throw new IllegalArgumentException("Unknown type");
         }
+        app = (App) getActivity().getApplication();
 
-        api = ((App) getActivity().getApplication()).getApi();
+        api = app.getApi();
     }
 
     // ActionMode
@@ -137,6 +141,7 @@ public class ItemsFragment   extends Fragment {
     private void showDialog() {
         ConfirmationDialog dialog = new ConfirmationDialog();
         dialog.show(getFragmentManager(),"ConfirmationDialog");
+
     }
 
 
@@ -201,13 +206,34 @@ public class ItemsFragment   extends Fragment {
         if (requestCode == ADD_ITEM_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
            Item item = data.getParcelableExtra("item");
            if(item.type.equals(type)) {
-               adapter.addItem(item);
+//               adapter.addItem(item);
+            addItem(item);
+
            }
-           adapter.addItem(item);
-            //Log.i(TAG, "onActivityResult: name = "+item.name + " price = "+item.price);
+
         }
       //  super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void addItem(final Item item) {
+       Call<AddItemsResult> call = api.addItem(item.price, item.name, item.type);
+       call.enqueue(new Callback<AddItemsResult>() {
+           @Override
+           public void onResponse(Call<AddItemsResult> call, Response<AddItemsResult> response) {
+               AddItemsResult result = response.body();
+               if (result.status.equals("success")) {
+                   adapter.addItem(item);
+               }
+           }
+
+           @Override
+           public void onFailure(Call<AddItemsResult> call, Throwable t) {
+
+           }
+       });
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////
 
     //    private void loadItems() {
 //       AsyncTask<Void, Void, List<Item>> task =  new AsyncTask<Void, Void, List<Item>>() {
