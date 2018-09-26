@@ -119,6 +119,7 @@ public class AuthActivity extends AppCompatActivity {
 
     private void showSuccess() {
         Toast.makeText(this, "Account successfully obtained", Toast.LENGTH_SHORT).show();
+
     }
 
     private void showError(String error) {

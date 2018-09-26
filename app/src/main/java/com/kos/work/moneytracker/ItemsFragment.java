@@ -222,6 +222,7 @@ public class ItemsFragment   extends Fragment {
            public void onResponse(Call<AddItemsResult> call, Response<AddItemsResult> response) {
                AddItemsResult result = response.body();
                if (result.status.equals("success")) {
+                   item.id = result.id;
                    adapter.addItem(item);
                }
            }
