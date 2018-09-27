@@ -41,6 +41,7 @@ public class ItemsFragment   extends Fragment {
         ItemsFragment fragment = new ItemsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ItemsFragment.TYPE_KEY, type);
+        bundle.putBoolean("key", true);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -61,7 +62,7 @@ public class ItemsFragment   extends Fragment {
         adapter = new ItemsAdapter();
         adapter.setListiner(new AdapterListener());
         Bundle bundle = getArguments();
-        type = bundle.getString(TYPE_KEY, Item.TYPE_UNKNOWN);
+        type = bundle.getString(TYPE_KEY, Item.TYPE_EXPENSES);
 
         if (type.equals(Item.TYPE_UNKNOWN)) {
             throw new IllegalArgumentException("Unknown type");
@@ -141,7 +142,13 @@ public class ItemsFragment   extends Fragment {
     private void showDialog() {
         ConfirmationDialog dialog = new ConfirmationDialog();
         dialog.show(getFragmentManager(),"ConfirmationDialog");
+        dialog.setListener(new ConfirmationDialogListener() {
+            @Override
+            public void onPositiveBtnClicked() {removeSelectedItems();}
 
+            @Override
+            public void onNegativeBtnClicked() {actionMode.finish();}
+        });
     }
 
 

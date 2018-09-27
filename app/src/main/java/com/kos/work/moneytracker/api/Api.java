@@ -19,6 +19,8 @@ public interface Api {
     @POST("items/add")
     Call<AddItemsResult> addItem(@Query("price") String price, @Query("name") String name, @Query("type") String type);
 
+    @GET("balance")
+    Call<BalanceResult> balance();
 
 
 
