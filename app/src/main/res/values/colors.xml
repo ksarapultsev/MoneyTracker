@@ -20,4 +20,9 @@
 
     <color name="textColor">#FF0000</color>
     <color name="colorBackground">#FF0000</color>
+
+    <color name="balance_total_color">#3ab7ae</color>
+    <color name="balance_expense_color">#f76c41</color>
+    <color name="balance_income_color">#fcc31e</color>
+    <color name="balance_secondary_text_color">#95989a</color>
 </resources>

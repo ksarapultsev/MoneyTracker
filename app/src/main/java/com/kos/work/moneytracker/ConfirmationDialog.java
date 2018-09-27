@@ -10,6 +10,11 @@ import android.support.v4.app.DialogFragment;
 
 public class ConfirmationDialog extends DialogFragment {
 
+    private ConfirmationDialogListener listener = null;
+
+    public void setListener(ConfirmationDialogListener listener) {
+        this.listener = listener;
+    }
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -20,13 +25,17 @@ public class ConfirmationDialog extends DialogFragment {
                 .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        if (listener != null) {
+                            listener.onPositiveBtnClicked();
+                        }
                     }
                 })
                 .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        if (listener != null) {
+                            listener.onNegativeBtnClicked();
+                        }
                     }
                 })
                 .create();
